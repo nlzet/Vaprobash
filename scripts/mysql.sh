@@ -44,3 +44,6 @@ if [ $3 == "true" ]; then
 
     service mysql restart
 fi
+
+# Remove root password
+mysql -u root -proot -e "use mysql; UPDATE user SET Password=PASSWORD('') WHERE User='root'; FLUSH PRIVILEGES;"
