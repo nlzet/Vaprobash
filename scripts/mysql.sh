@@ -17,8 +17,8 @@ fi
 
 # Install MySQL without password prompt
 # Set username and password to 'root'
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $1"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $1"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password "
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password "
 
 # Install MySQL Server
 # -qq implies -y --force-yes

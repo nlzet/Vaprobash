@@ -23,8 +23,9 @@ do
     ln -s ${TARGET}/$dir/ /vagrant/phpmyadmin
 done
 
-cat <<< '<?php
-$cfg['blowfish_secret'] = ''; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+cat > /vagrant/phpmyadmin/config.inc.php <<"END"
+<?php
+$cfg['blowfish_secret'] = '';
 $i = 0;
 $i++;
 $cfg['Servers'][$i]['auth_type'] = 'config';
@@ -34,4 +35,8 @@ $cfg['Servers'][$i]['password'] = '';
 $cfg['Servers'][$i]['connect_type'] = 'tcp';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = true;
-' > /vagrant/phpmyadmin/config.inc.php
+
+$cfg['UploadDir'] = '/vagrant/';
+$cfg['SaveDir'] = '/vagrant/';
+
+END
