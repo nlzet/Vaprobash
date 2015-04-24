@@ -8,9 +8,13 @@ TARGET=/opt/phpmyadmin
 
 [ ! -f /tmp/${FILE} ] && wget -nv ${URL} -O /tmp/${FILE}
 
-rm -Rf ${TARGET}/phpMyAdmin-*/
+for dir in `find /opt/ -name "phpM*" -type d`;
+do
+    rm -Rf $dir
+done
 
-mkdir $TARGET
+[ ! -d ${TARGET} ] && mkdir $TARGET
+
 tar -xjf /tmp/${FILE} -C ${TARGET}
 
 for dir in `ls /opt/phpmyadmin`;
