@@ -1,0 +1,9 @@
+vagrant plugin install vagrant-vbguest
+
+# vagrant ssh -c "sudo dpkg --purge virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
+# vagrant vbguest --do install -R
+
+sudo ln -s /opt/VBoxGuestAdditions-4.3.26/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+
+vagrant up; vagrant ssh -c 'sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions'; vagrant reload
+

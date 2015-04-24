@@ -105,10 +105,11 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8000
 
   # Use NFS for the shared folder
-  config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['nolock,vers=3,udp,noatime']
+  #config.vm.synced_folder ".", "/vagrant",
+  #          id: "core",
+  #          :nfs => true,
+  #          :mount_options => ['nolock,vers=3,udp,noatime']
+  config.vm.synced_folder ".", "/vagrant", type: "smb"
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
@@ -148,10 +149,10 @@ Vagrant.configure("2") do |config|
     # Usage docs: http://fgrehm.viewdocs.io/vagrant-cachier/usage
     config.cache.scope = :box
 
-    config.cache.synced_folder_opts = {
-        type: :nfs,
-        mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
-    }
+    #config.cache.synced_folder_opts = {
+    #    type: :nfs,
+    #    mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+    #}
   end
 
   # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
