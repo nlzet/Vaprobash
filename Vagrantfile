@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "nlzet"
 github_repo     = "Vaprobash"
-github_branch   = "1.4.0"
+github_branch   = "master"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Server Configuration
@@ -19,7 +19,7 @@ hostname        = "vaprobash.dev"
 #   192.168.0.1 - 192.168.255.254
 server_ip             = "192.168.22.10"
 server_cpus           = "1"   # Cores
-server_memory         = "384" # MB
+server_memory         = "1024" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
 # UTC        for Universal Coordinated Time
@@ -29,7 +29,7 @@ server_swap           = "768" # Options: false | int (MB) - Guideline: Between o
 server_timezone  = "UTC"
 
 # Database Configuration
-mysql_root_password   = "root"   # We'll assume user "root"
+mysql_root_password   = ""   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
@@ -50,7 +50,7 @@ hhvm                  = "false"
 
 # PHP Options
 composer_packages     = [        # List any global Composer packages that you want to install
-  #"phpunit/phpunit:4.0.*",
+  "phpunit/phpunit:4.*",
   #"codeception/codeception=*",
   #"phpspec/phpspec:2.0.*@dev",
   #"squizlabs/php_codesniffer:1.5.*",
@@ -67,9 +67,9 @@ symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
-  #"grunt-cli",
+  "grunt-cli",
   #"gulp",
-  #"bower",
+  "bower",
   #"yo",
 ]
 
@@ -195,7 +195,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Apache Base
-  # config.vm.provision "shell", path: "#{github_url}/scripts/apache.sh", args: [server_ip, public_folder, hostname, github_url]
+  config.vm.provision "shell", path: "#{github_url}/scripts/apache.sh", args: [server_ip, public_folder, hostname, github_url]
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "#{github_url}/scripts/nginx.sh", args: [server_ip, public_folder, hostname, github_url]
@@ -206,7 +206,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision MySQL
-  # config.vm.provision "shell", path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
+  config.vm.provision "shell", path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
 
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "#{github_url}/scripts/pgsql.sh", args: pgsql_root_password
@@ -298,7 +298,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Composer
-  # config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
+  config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
 
   # Provision Laravel
   # config.vm.provision "shell", path: "#{github_url}/scripts/laravel.sh", privileged: false, args: [server_ip, laravel_root_folder, public_folder, laravel_version]
@@ -310,7 +310,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/screen.sh"
 
   # Install Mailcatcher
-  # config.vm.provision "shell", path: "#{github_url}/scripts/mailcatcher.sh"
+  config.vm.provision "shell", path: "#{github_url}/scripts/mailcatcher.sh"
 
   # Install git-ftp
   # config.vm.provision "shell", path: "#{github_url}/scripts/git-ftp.sh", privileged: false
