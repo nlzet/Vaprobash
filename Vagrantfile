@@ -324,6 +324,9 @@ Vagrant.configure("2") do |config|
   # Install Android
   # config.vm.provision "shell", path: "#{github_url}/scripts/android.sh"
 
+  # Install Android
+  config.vm.provision "shell", path: "#{github_url}/scripts/phpmyadmin.sh"
+
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
