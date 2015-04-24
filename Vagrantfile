@@ -102,14 +102,16 @@ Vagrant.configure("2") do |config|
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
-  config.vm.network :forwarded_port, guest: 80, host: 8000
+  config.vm.network :forwarded_port, guest: 80, host: 8014
+  config.vm.network :forwarded_port, guest: 9000, host: 8015
+  config.vm.network :forwarded_port, guest: 3306, host: 8016
 
   # Use NFS for the shared folder
   #config.vm.synced_folder ".", "/vagrant",
   #          id: "core",
   #          :nfs => true,
   #          :mount_options => ['nolock,vers=3,udp,noatime']
-  config.vm.synced_folder ".", "/vagrant", type: "smb"
+  config.vm.synced_folder ".", "/vagrant", id: "core", owner: "www-data", group: "www-data"
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
