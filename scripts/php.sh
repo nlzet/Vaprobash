@@ -46,7 +46,7 @@ else
 
     # Install PHP
     # -qq implies -y --force-yes
-    sudo apt-get install -qq php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-gmp php5-mcrypt php5-memcached php5-imagick php5-intl php5-xdebug
+    sudo apt-get install -qq php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-gmp php5-mcrypt php5-memcached php5-imagick php5-intl php5-xdebug php-pear php5-dev
 
     # Set PHP FPM to listen on TCP instead of Socket
     sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php5/fpm/pool.d/www.conf
@@ -90,3 +90,12 @@ EOF
 
     sudo service php5-fpm restart
 fi
+
+# APC install
+yes '' | sudo pecl install apcu-beta
+
+# APCU Config
+   cat > /etc/php5/cli/conf.d/20-apcu.ini << EOF
+extension=apcu.so
+apc.enabled=1
+EOF
