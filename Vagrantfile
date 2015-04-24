@@ -29,7 +29,7 @@ server_swap           = "768" # Options: false | int (MB) - Guideline: Between o
 server_timezone  = "UTC"
 
 # Database Configuration
-mysql_root_password   = ""   # We'll assume user "root"
+mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
