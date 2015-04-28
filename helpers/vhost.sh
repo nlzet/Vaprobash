@@ -48,7 +48,7 @@ cat <<- _EOF_
 
 
     <Directory $DocumentRoot>
-        Options -Indexes +FollowSymLinks +MultiViews
+        Options +Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
 
@@ -82,7 +82,7 @@ cat <<- _EOF_
     DocumentRoot $DocumentRoot
 
     <Directory $DocumentRoot>
-        Options -Indexes +FollowSymLinks +MultiViews
+        Options +Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
 
