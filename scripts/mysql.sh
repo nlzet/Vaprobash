@@ -46,4 +46,8 @@ if [ $3 == "true" ]; then
 fi
 
 # Remove root password
-mysql -u root -proot -e "use mysql; UPDATE user SET Password=PASSWORD('') WHERE User='root'; FLUSH PRIVILEGES;"
+MYSQL_PASSWORD_CHECK_FILE='/home/vagrant/.mysql-root-password'
+if [ ! -f ${MYSQL_PASSWORD_CHECK_FILE} ]; then
+    mysql -u root -proot -e "use mysql; UPDATE user SET Password=PASSWORD('') WHERE User='root'; FLUSH PRIVILEGES;"
+    echo "root password is set" > ${MYSQL_PASSWORD_CHECK_FILE}
+fi
