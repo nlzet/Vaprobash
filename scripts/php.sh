@@ -95,7 +95,7 @@ fi
 yes '' | sudo pecl install apcu-beta
 
 # APCU Config
-   cat > /etc/php5/cli/conf.d/20-apcu.ini << EOF
+   cat > /etc/php5/fpm/conf.d/20-apcu.ini << EOF
 extension=apcu.so
 apc.enabled=1
 EOF
