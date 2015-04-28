@@ -88,14 +88,17 @@ EOF
     sudo sed -i "s/;date.timezone =.*/date.timezone = ${PHP_TIMEZONE/\//\\/}/" /etc/php5/fpm/php.ini
     sudo sed -i "s/;date.timezone =.*/date.timezone = ${PHP_TIMEZONE/\//\\/}/" /etc/php5/cli/php.ini
 
-    sudo service php5-fpm restart
-fi
+    # Enable short_open_tag
+    sudo sed -i "s/short_open_tag = .*/short_open_tag = On/" /etc/php5/fpm/php.ini
 
-# APC install
-yes '' | sudo pecl install apcu-beta
+    # APC install
+    # yes '' | sudo pecl install apcu-beta
 
-# APCU Config
-   cat > /etc/php5/fpm/conf.d/20-apcu.ini << EOF
+    # APCU Config
+    cat > /etc/php5/fpm/conf.d/20-apcu.ini << EOF
 extension=apcu.so
 apc.enabled=1
 EOF
+
+    sudo service php5-fpm restart
+fi
