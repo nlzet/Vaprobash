@@ -85,7 +85,7 @@ Vagrant.configure("2") do |config|
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.define "Vaprobash" do |vapro|
+  config.vm.define "Devserver" do |vapro|
   end
 
   if Vagrant.has_plugin?("vagrant-hostmanager")
@@ -102,20 +102,22 @@ Vagrant.configure("2") do |config|
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
-  config.vm.network :forwarded_port, guest: 80, host: 8080
-  config.vm.network :forwarded_port, guest: 9000, host: 9000
-  config.vm.network :forwarded_port, guest: 3306, host: 3306
+  config.vm.network :forwarded_port, guest: 80, host: 8521
+  config.vm.network :forwarded_port, guest: 9000, host: 8522
+  config.vm.network :forwarded_port, guest: 3306, host: 8523
 
   # Use NFS for the shared folder
   #config.vm.synced_folder ".", "/vagrant",
   #          id: "core",
   #          :nfs => true,
   #          :mount_options => ['nolock,vers=3,udp,noatime']
-  config.vm.synced_folder ".", "/vagrant", id: "core", owner: "vagrant", group: "www-data"
+  # config.vm.synced_folder ".", "/vagrant", id: "core", owner: "vagrant", group: "www-data"
+  config.vm.synced_folder ".", "/vagrant", type: "smb"
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
+    # vb.gui = true
     vb.name = "Devserver"
 
     # Set server cpus
