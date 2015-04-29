@@ -2,28 +2,31 @@
 
 echo ">>> Installing PhpMyAdmin"
 
-URL=http://switch.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.4.3/phpMyAdmin-4.4.3-all-languages.tar.bz2
+PMA_VERSION=4.4.3
+URL=downloads.sourceforge.net/project/phpmyadmin/phpMyAdmin/${PMA_VERSION}/phpMyAdmin-${PMA_VERSION}-all-languages.tar.bz2
 FILE=${URL##*/}
 TARGET=/opt/phpmyadmin
 
-[ ! -f /tmp/${FILE} ] && wget -nv ${URL} -O /tmp/${FILE}
+if [ ! -f /tmp/${FILE} ]; then
 
-for dir in `find /opt/ -name "phpM*" -type d`;
-do
-    rm -Rf $dir
-done
+    wget -nv ${URL} -O /tmp/${FILE}
 
-[ ! -d ${TARGET} ] && mkdir $TARGET
+    for dir in `find /opt/ -name "phpM*" -type d`;
+    do
+        rm -Rf $dir
+    done
 
-tar -xjf /tmp/${FILE} -C ${TARGET}
+    [ ! -d ${TARGET} ] && mkdir $TARGET
 
-for dir in `ls /opt/phpmyadmin`;
-do
-    rm /vagrant/phpmyadmin
-    ln -s ${TARGET}/$dir/ /vagrant/phpmyadmin
-done
+    tar -xjf /tmp/${FILE} -C ${TARGET}
 
-cat > /vagrant/phpmyadmin/config.inc.php <<"END"
+    for dir in `ls /opt/phpmyadmin`;
+    do
+        rm /vagrant/phpmyadmin
+        ln -s ${TARGET}/$dir/ /vagrant/phpmyadmin
+    done
+
+    cat > /vagrant/phpmyadmin/config.inc.php <<"END"
 <?php
 $cfg['blowfish_secret'] = '';
 $i = 0;
@@ -40,3 +43,5 @@ $cfg['UploadDir'] = '/vagrant/';
 $cfg['SaveDir'] = '/vagrant/';
 
 END
+
+fi
