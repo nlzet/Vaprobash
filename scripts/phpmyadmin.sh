@@ -30,7 +30,7 @@ if [ ! -f /tmp/${FILE} ]; then
 
     DocumentRoot /vagrant
 
-    Alias /phpmyadmin/ "${TARGET}/$dir/"
+    Alias /phpmyadmin "${TARGET}/$dir/"
 
     <Directory "${TARGET}/$dir/">
         Order allow,deny
