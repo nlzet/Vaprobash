@@ -92,7 +92,7 @@ EOF
     sudo sed -i "s/short_open_tag = .*/short_open_tag = On/" /etc/php5/fpm/php.ini
 
     # APC install
-    # yes '' | sudo pecl install apcu-beta
+    yes '' | sudo pecl install apcu-beta
 
     # APCU Config
     cat > /etc/php5/fpm/conf.d/20-apcu.ini << EOF

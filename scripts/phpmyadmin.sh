@@ -8,7 +8,6 @@ FILE=${URL##*/}
 TARGET=/opt/phpmyadmin
 
 if [ ! -f /tmp/${FILE} ]; then
-
     wget -nv ${URL} -O /tmp/${FILE}
 
     for dir in `find /opt/ -name "phpM*" -type d`;
@@ -22,11 +21,44 @@ if [ ! -f /tmp/${FILE} ]; then
 
     for dir in `ls /opt/phpmyadmin`;
     do
-        rm /vagrant/phpmyadmin
-        ln -s ${TARGET}/$dir/ /vagrant/phpmyadmin
+        # Override default config
+        cat > /etc/apache2/sites-enabled/192.168.22.10.conf <<END
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName 192.168.22.10
+    ServerAlias devserver.dev
+
+    DocumentRoot /vagrant
+
+    Alias /phpmyadmin/ "${TARGET}/$dir/"
+
+    <Directory "${TARGET}/$dir/">
+        Order allow,deny
+        Allow from all
+        Require all granted
+
+        <FilesMatch \.php$>
+            SetHandler "proxy:fcgi://127.0.0.1:9000"
+        </FilesMatch>
+    </Directory>
+
+    <Directory /vagrant>
+        Options +Indexes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+
+        <FilesMatch \.php$>
+            SetHandler "proxy:fcgi://127.0.0.1:9000"
+        </FilesMatch>
+    </Directory>
+
+    LogLevel warn
+</VirtualHost>
+END
+
     done
 
-    cat > /vagrant/phpmyadmin/config.inc.php <<"END"
+    cat > ${TARGET}/$dir/config.inc.php <<"END"
 <?php
 $cfg['blowfish_secret'] = '';
 $i = 0;
@@ -45,3 +77,5 @@ $cfg['SaveDir'] = '/vagrant/';
 END
 
 fi
+
+sudo service apache2 restart
