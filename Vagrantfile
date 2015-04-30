@@ -103,7 +103,6 @@ Vagrant.configure("2") do |config|
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
   config.vm.network :forwarded_port, guest: 80, host: 8521
-  config.vm.network :forwarded_port, guest: 9000, host: 8522
   config.vm.network :forwarded_port, guest: 3306, host: 8523
 
   # Use NFS for the shared folder
@@ -334,6 +333,6 @@ Vagrant.configure("2") do |config|
   # Any local scripts you may want to run post-provisioning.
   # Add these to the same directory as the Vagrantfile.
   ##########
-  # config.vm.provision "shell", path: "./local-script.sh"
+  config.vm.provision "shell", path: "#{github_url}/scripts/custom.sh"
 
 end
