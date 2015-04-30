@@ -3,7 +3,6 @@
 echo ">>> Installing Custom scripts"
 
 CHECK_APCU_INSTALL_FILE=/home/vagrant/.apcu_installed
-
 if [ ! -f ${CHECK_APCU_INSTALL_FILE} ]; then
 
     # APC install
@@ -13,7 +12,7 @@ if [ ! -f ${CHECK_APCU_INSTALL_FILE} ]; then
     cat > /etc/php5/fpm/conf.d/20-apcu.ini << EOF
     extension=apcu.so
     apc.enabled=1
-    EOF
+EOF
 
     echo "installed" > ${CHECK_APCU_INSTALL_FILE}
 
@@ -23,7 +22,6 @@ sudo service php5-fpm restart
 
 
 CHECK_WKHTMLTOPDF_INSTALL_FILE=/usr/bin/wkhtmltopdf
-
 if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
 
     # Install wkhtmltopdf
