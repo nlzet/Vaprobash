@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo ">>> Installing Custom scripts"
+
 # APC install
 yes '' | sudo pecl install apcu-beta
 
