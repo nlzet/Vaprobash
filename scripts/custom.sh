@@ -21,9 +21,16 @@ fi
 
 sudo service php5-fpm restart
 
-# Install wkhtmltopdf
-sudo apt-get -y install wkhtmltopdf
-sudo apt-get -y install xvfb
-echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
-chmod a+rx /usr/bin/wkhtmltopdf.sh
-ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
+
+CHECK_WKHTMLTOPDF_INSTALL_FILE=/usr/bin/wkhtmltopdf
+
+if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
+
+    # Install wkhtmltopdf
+    sudo apt-get -y install wkhtmltopdf
+    sudo apt-get -y install xvfb
+    echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
+    chmod a+rx /usr/bin/wkhtmltopdf.sh
+    ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
+
+fi
