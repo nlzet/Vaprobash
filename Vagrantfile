@@ -26,7 +26,7 @@ server_swap           = "768" # Options: false | int (MB) - Guideline: Between o
 # EST        for Eastern Standard Time
 # US/Central for American Central
 # US/Eastern for American Eastern
-server_timezone  = "UTC"
+server_timezone  = "Europe/Amsterdam"
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
@@ -36,7 +36,7 @@ pgsql_root_password   = "root"   # We'll assume user "root"
 mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
-php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
+php_timezone          = "Europe/Amsterdam"    # http://php.net/manual/en/timezones.php
 php_version           = "5.6"    # Options: 5.5 | 5.6
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
@@ -104,6 +104,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: server_ip
   config.vm.network :forwarded_port, guest: 80, host: 8521
   config.vm.network :forwarded_port, guest: 3306, host: 8523
+  config.vm.network :forwarded_port, guest: 9000, host: 8524
 
   # Use NFS for the shared folder
   #config.vm.synced_folder ".", "/vagrant",

@@ -18,8 +18,9 @@ EOF
 
 fi
 
-sudo service php5-fpm restart
+sudo sed -i "s/error_reporting = E_ALL/error_reporting=E_ALL \& ~E_DEPRECATED \& ~E_STRICT/" /etc/php5/fpm/php.ini
 
+sudo service php5-fpm restart
 
 CHECK_WKHTMLTOPDF_INSTALL_FILE=/usr/bin/wkhtmltopdf
 if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
@@ -32,3 +33,11 @@ if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
     ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
 fi
+
+sudo locale-gen de_DE.utf8
+sudo locale-gen fr_FR.utf8
+sudo locale-gen en_US.utf8
+sudo locale-gen nl_NL.utf8
+
+sudo service php5-fpm restart
+sudo service apache2 restart
