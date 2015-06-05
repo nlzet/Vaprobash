@@ -18,7 +18,8 @@ EOF
 
 fi
 
-sudo sed -i "s/error_reporting = E_ALL/error_reporting=E_ALL \& ~E_DEPRECATED \& ~E_STRICT/" /etc/php5/fpm/php.ini
+echo ">>> Installing Custom PHP ini"
+sudo sed -i "s/error_reporting=E_ALL/error_reporting=E_ALL \& ~E_DEPRECATED \& ~E_STRICT/" /etc/php5/fpm/php.ini
 
 sudo service php5-fpm restart
 
