@@ -105,7 +105,6 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8521
   config.vm.network :forwarded_port, guest: 3306, host: 8523
   config.vm.network :forwarded_port, guest: 9000, host: 8524
-  config.vm.network :forwarded_port, guest: 1080, host: 8525
 
   # Use NFS for the shared folder
   #config.vm.synced_folder ".", "/vagrant",
