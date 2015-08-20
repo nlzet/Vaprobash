@@ -2,7 +2,7 @@
 
 echo ">>> Installing PhpMyAdmin"
 
-PMA_VERSION=4.4.3
+PMA_VERSION=4.4.13
 URL=downloads.sourceforge.net/project/phpmyadmin/phpMyAdmin/${PMA_VERSION}/phpMyAdmin-${PMA_VERSION}-all-languages.tar.bz2
 FILE=${URL##*/}
 TARGET=/opt/phpmyadmin
