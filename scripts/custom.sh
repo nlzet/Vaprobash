@@ -42,3 +42,8 @@ sudo locale-gen nl_NL.utf8
 
 sudo service php5-fpm restart
 sudo service apache2 restart
+
+echo ">>> Installing Custom Node and node packages"
+
+sudo apt-get install -y nodejs npm nodejs-legacy
+sudo npm install -g bower grunt grunt-cli
