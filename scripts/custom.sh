@@ -39,6 +39,8 @@ if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
     ln -s /usr/bin/wkhtmltopdf.sh
 fi
 
+echo ">>> Installing Custom server locale's for php i18n"
+
 sudo locale-gen de_DE.utf8
 sudo locale-gen fr_FR.utf8
 sudo locale-gen en_US.utf8
