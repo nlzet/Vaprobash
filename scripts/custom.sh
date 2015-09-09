@@ -26,17 +26,17 @@ sudo service php5-fpm restart
 CHECK_WKHTMLTOPDF_INSTALL_FILE=/usr/bin/wkhtmltopdf
 if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
 
-    # Add repository for wkhtmltopdf 0.12
-    sudo add-apt-repository -y ppa:ecometrica/servers
-    # Update Again
-    sudo apt-key update
-    sudo apt-get update
-    # Install wkhtmltopdf
-    sudo apt-get -y install wkhtmltopdf
+    # wkhtmltopdf
+    sudo apt-get install -y software-properties-common python-software-properties xfonts-75dpi
+    sudo wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+    sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+    sudo apt-get -f install
+
+    # Install xvfb monitor
     sudo apt-get -y install xvfb
-    echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
+    echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/local/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
     chmod a+rx /usr/bin/wkhtmltopdf.sh
-    ln -s /usr/bin/wkhtmltopdf.sh
+    sudo ln -s /usr/bin/wkhtmltopdf.sh /usr/bin/wkhtmltopdf
 fi
 
 echo ">>> Installing Custom server locale's for php i18n"
