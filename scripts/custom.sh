@@ -51,5 +51,7 @@ sudo service apache2 restart
 
 echo ">>> Installing Custom Node and node packages"
 
+sudo apt-get -f install
 sudo apt-get install -y nodejs npm nodejs-legacy
+sudo apt-get -f install
 sudo npm install -g bower grunt grunt-cli
