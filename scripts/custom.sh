@@ -30,7 +30,7 @@ if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
     sudo apt-get install -y software-properties-common python-software-properties xfonts-75dpi
     sudo wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
     sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-    sudo apt-get -f install
+    sudo apt-get -f -y install
 
     # Install xvfb monitor
     sudo apt-get -y install xvfb
@@ -51,7 +51,7 @@ sudo service apache2 restart
 
 echo ">>> Installing Custom Node and node packages"
 
-sudo apt-get -f install
+sudo apt-get -f -y install
 sudo apt-get install -y nodejs npm nodejs-legacy
-sudo apt-get -f install
+sudo apt-get -f -y install
 sudo npm install -g bower grunt grunt-cli
