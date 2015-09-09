@@ -26,13 +26,17 @@ sudo service php5-fpm restart
 CHECK_WKHTMLTOPDF_INSTALL_FILE=/usr/bin/wkhtmltopdf
 if [ ! -f ${CHECK_WKHTMLTOPDF_INSTALL_FILE} ]; then
 
+    # Add repository for wkhtmltopdf 0.12
+    sudo add-apt-repository -y ppa:ecometrica/servers
+    # Update Again
+    sudo apt-key update
+    sudo apt-get update
     # Install wkhtmltopdf
     sudo apt-get -y install wkhtmltopdf
     sudo apt-get -y install xvfb
     echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
     chmod a+rx /usr/bin/wkhtmltopdf.sh
-    ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
-
+    ln -s /usr/bin/wkhtmltopdf.sh
 fi
 
 sudo locale-gen de_DE.utf8
