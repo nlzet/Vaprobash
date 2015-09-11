@@ -5,16 +5,8 @@ echo ">>> Installing Custom scripts"
 CHECK_APCU_INSTALL_FILE=/home/vagrant/.apcu_installed
 if [ ! -f ${CHECK_APCU_INSTALL_FILE} ]; then
 
-    # APC install
-    # yes '' | sudo pecl install apcu-beta
+    # APCu install
     sudo apt-get -y install php5-apcu
-
-    # APCU Config
-    cat > /etc/php5/fpm/conf.d/20-apcu.ini << EOF
-    extension=apcu.so
-    apc.enabled=1
-EOF
-
     echo "installed" > ${CHECK_APCU_INSTALL_FILE}
 
 fi
