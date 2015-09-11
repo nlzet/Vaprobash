@@ -83,7 +83,7 @@ sphinxsearch_version  = "rel22" # rel20, rel21, rel22, beta, daily, stable
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 14.04
-  config.vm.box = "ubuntu/vivid64"
+  config.vm.box = "ubuntu/trusty64"
 
   config.vm.define "Devserver" do |vapro|
   end
