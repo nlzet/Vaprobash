@@ -54,4 +54,4 @@ echo ">>> Installing Custom Node and node packages"
 sudo apt-get -f -y install
 sudo apt-get install -y nodejs npm nodejs-legacy
 sudo apt-get -f -y install
-sudo npm install -g bower grunt grunt-cli
+sudo npm install -g bower grunt grunt-cli --silent
