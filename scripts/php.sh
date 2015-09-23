@@ -81,10 +81,11 @@ xdebug.var_display_max_depth = 5
 xdebug.var_display_max_children = 256
 xdebug.var_display_max_data = 1024
 EOF
-
     # PHP Error Reporting Config
-    sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
+    sed -i 's/^error_reporting = .*/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_STRICT/' /etc/php5/fpm/php.ini
+    sed -i 's/^error_reporting = .*/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_STRICT/' /etc/php5/cli/php.ini
     sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
+    sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/cli/php.ini
 
     # PHP Date Timezone
     sudo sed -i "s/;date.timezone =.*/date.timezone = ${PHP_TIMEZONE/\//\\/}/" /etc/php5/fpm/php.ini
@@ -92,6 +93,7 @@ EOF
 
     # Enable short_open_tag
     sudo sed -i "s/short_open_tag = .*/short_open_tag = On/" /etc/php5/fpm/php.ini
+    sudo sed -i "s/short_open_tag = .*/short_open_tag = On/" /etc/php5/cli/php.ini
 
     sudo service php5-fpm restart
 
